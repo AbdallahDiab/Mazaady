@@ -37,7 +37,7 @@ const CategoriesComponent = () => {
       ]);
    };
    const { isLoading: childCategoryLoading } = useGetChildCategory(
-      38288,
+      selectedChildId,
       onSuccess
    );
    const [subCategoryState, setSubCategoryState] = useState(
@@ -102,7 +102,15 @@ const CategoriesComponent = () => {
       <Row gutter={60}>
          <Col>
             <Form layout="vertical" onFinish={onFinish}>
-               <Form.Item label="Category" name="category">
+               <Form.Item
+                  label="Category"
+                  name="category"
+                  rules={[
+                     {
+                        required: true,
+                     },
+                  ]}
+               >
                   <CustomSelect
                      arr={data?.data.data.categories}
                      loading={categoryLoading}
@@ -112,7 +120,15 @@ const CategoriesComponent = () => {
                      }}
                   />
                </Form.Item>
-               <Form.Item label="Category" name="subCategory">
+               <Form.Item
+                  label="Sub Category"
+                  name="subCategory"
+                  rules={[
+                     {
+                        required: true,
+                     },
+                  ]}
+               >
                   <CustomSelect
                      arr={subCategoryList}
                      loading={categoryLoading}
@@ -126,8 +142,9 @@ const CategoriesComponent = () => {
                {subCategoryState &&
                   subCategoryState.map((dropdown) => {
                      console.log(
+                        dropdown.value_id == dropdown.id,
                         dropdown.value_id,
-                        `${dropdown.id}-other`,
+                        dropdown.id,
                         "sdfsdf"
                      );
                      return (
@@ -144,7 +161,7 @@ const CategoriesComponent = () => {
                                  }}
                               />
                            </Form.Item>
-                           {dropdown.value_id === `${dropdown.id}` ? (
+                           {dropdown.value_id == dropdown.id ? (
                               <Form.Item name={dropdown.name + " " + "[other]"}>
                                  <Input
                                     placeholder="Enter Other Option"
@@ -183,8 +200,14 @@ const CategoriesComponent = () => {
                </Row>
             </Form>
          </Col>
-         <Col>
-            <Table dataSource={dataSource} columns={tableArr} />
+         <Col span={24}>
+            {tableArr.length > 0 && (
+               <Table
+                  pagination={false}
+                  dataSource={dataSource}
+                  columns={tableArr}
+               />
+            )}
          </Col>
       </Row>
    );
