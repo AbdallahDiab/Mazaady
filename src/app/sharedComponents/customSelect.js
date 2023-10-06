@@ -14,7 +14,9 @@ const CustomSelect = ({
    arr?.forEach((item) => {
       options.push({
          label: item.name,
-         value: item.id,
+         // value: item.id,
+         value: `${item.id}-${item.name}`,
+
          children: item.children,
       });
    });
