@@ -4,12 +4,10 @@ import {
    FlagIcon,
    LoveIcon,
    ShareIcon,
-   StarIcon,
 } from "@/assets/icons";
 import { Avatar, Button, Card, Col, Input, Rate, Row } from "antd";
 import React from "react";
 import avatar from "../../assets/imges/avatar2.png";
-import carPhoto from "../../assets/imges/rimac-nevera.jpg";
 
 const Post = () => {
    return (

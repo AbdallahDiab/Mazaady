@@ -7,8 +7,8 @@ const SwipeList = () => {
       <div>
          <Row gutter={[0, 6]}>
             {" "}
-            {["j", "j", "f", "f", "f"].map((item) => (
-               <Col>
+            {arr.map((item, index) => (
+               <Col key={index}>
                   <img
                      className="car-photo"
                      width="78"

@@ -13,8 +13,6 @@ const CategoriesComponent = () => {
    const [subCategoryList, setSubCategoryList] = useState([]);
    const [tableValues, setTableValues] = useState({});
    const [tableArr, setTableArr] = useState([]);
-   console.log(tableArr, "tableArr");
-
    const [selectedSubCategory, setSelectedSubCategory] = useState();
    const { data, isLoading: categoryLoading } = useGetCategory();
    const { data: subCategory, isLoading: subcategoryLoading } =
@@ -80,13 +78,10 @@ const CategoriesComponent = () => {
    };
 
    const onFinish = (values) => {
-      console.log(values, "sdcsdc");
       setTableValues(values);
       handleTableArray(values);
    };
-   //tableValues
    const dataSource = [tableValues];
-
    const handleTableArray = (obj) => {
       let arr = [];
       Object.entries(obj).map(([key, value]) => {
@@ -95,8 +90,6 @@ const CategoriesComponent = () => {
 
       setTableArr(arr);
    };
-
-   console.log(tableArr, "tableArr");
 
    return (
       <Row gutter={60}>
@@ -141,12 +134,6 @@ const CategoriesComponent = () => {
 
                {subCategoryState &&
                   subCategoryState.map((dropdown) => {
-                     console.log(
-                        dropdown.value_id == dropdown.id,
-                        dropdown.value_id,
-                        dropdown.id,
-                        "sdfsdf"
-                     );
                      return (
                         <div key={dropdown.id}>
                            {" "}

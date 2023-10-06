@@ -37,7 +37,7 @@ const SearchHeader = () => {
    };
    return (
       <header>
-         <div class="container">
+         <div className="container">
             <div className="search-container">
                <Row style={{ width: "100%" }}>
                   <Col>

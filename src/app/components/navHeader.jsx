@@ -5,9 +5,9 @@ import { Select } from "antd";
 const NavHeader = () => {
    return (
       <header className="nav-header">
-         <div class="container">
+         <div className="container">
             <nav>
-               <div class="menu">
+               <div className="menu">
                   <span></span>
                   <span></span>
                </div>
@@ -27,23 +27,23 @@ const NavHeader = () => {
                </ul>
             </nav>
             <section>
-               <div class="icons">
-                  <div class="icon">
+               <div className="icons">
+                  <div className="icon">
                      <a href="#">
                         <PriceIcon />
                      </a>
                   </div>
-                  <div class="icon">
+                  <div className="icon">
                      <a href="#">
                         <HeartIcon />
                      </a>
                   </div>
-                  <div class="icon">
+                  <div className="icon">
                      <a href="#">
                         <NotificationIcon />
                      </a>
                   </div>
-                  <div class="icon">
+                  <div className="icon">
                      {" "}
                      <Select
                         options={[
