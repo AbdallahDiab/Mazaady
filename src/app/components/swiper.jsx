@@ -6,7 +6,7 @@ const SwiperComponent = () => {
    return (
       <Row justify="center">
          <Col span={12}>
-            <Row className="swipe-btn down" justify="center" align="middle">
+            <Row className="swipe-btn up" justify="center" align="middle">
                <UpOutlined />
             </Row>
          </Col>
@@ -14,7 +14,7 @@ const SwiperComponent = () => {
             <SwipeList />
          </Col>
          <Col span={12}>
-            <Row className="swipe-btn up" justify="center" align="middle">
+            <Row className=" swipe-btn down" justify="center" align="middle">
                <DownOutlined />
             </Row>
          </Col>

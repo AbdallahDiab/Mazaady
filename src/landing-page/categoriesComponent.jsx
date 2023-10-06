@@ -5,7 +5,7 @@ import {
    useGetChildCategory,
    useGetSubCategory,
 } from "./useCategory";
-import { Button, Col, Form, Input, Row, Table } from "antd";
+import { Button, Col, Form, Input, Row, Skeleton, Table } from "antd";
 import CustomSelect from "@/app/sharedComponents/customSelect";
 import Link from "next/link";
 
@@ -13,7 +13,7 @@ const CategoriesComponent = () => {
    const [subCategoryList, setSubCategoryList] = useState([]);
    const [tableValues, setTableValues] = useState({});
    const [tableArr, setTableArr] = useState([]);
-   const [selectedSubCategory, setSelectedSubCategory] = useState();
+   const [selectedSubCategory, setSelectedSubCategory] = useState(null);
    const { data, isLoading: categoryLoading } = useGetCategory();
    const { data: subCategory, isLoading: subcategoryLoading } =
       useGetSubCategory(selectedSubCategory);
@@ -132,48 +132,78 @@ const CategoriesComponent = () => {
                   />
                </Form.Item>
 
-               {subCategoryState &&
-                  subCategoryState.map((dropdown) => {
-                     return (
-                        <div key={dropdown.id}>
-                           {" "}
-                           <Form.Item
-                              label={dropdown.name}
-                              name={dropdown.name}
-                           >
-                              <CustomSelect
-                                 arr={dropdown.options}
-                                 onChange={(val, opt) => {
-                                    onChange(val, opt, dropdown);
-                                 }}
-                              />
-                           </Form.Item>
-                           {dropdown.value_id == dropdown.id ? (
-                              <Form.Item name={dropdown.name + " " + "[other]"}>
-                                 <Input
-                                    placeholder="Enter Other Option"
-                                    style={{ border: "2px solid #9B0257" }}
-                                 />
-                              </Form.Item>
-                           ) : (
-                              dropdown.children.map((child) => (
+               {subcategoryLoading && selectedSubCategory ? (
+                  <Row gutter={[0, 16]}>
+                     <Col span={24}>
+                        {" "}
+                        <Skeleton.Button
+                           active={true}
+                           size="large"
+                           shape="default"
+                           block={true}
+                        />
+                     </Col>
+                     <Col span={24}>
+                        <Skeleton.Button
+                           active={true}
+                           size="large"
+                           shape="default"
+                           block={true}
+                        />
+                     </Col>
+                  </Row>
+               ) : (
+                  <>
+                     {" "}
+                     {subCategoryState &&
+                        subCategoryState.map((dropdown) => {
+                           return (
+                              <div key={dropdown.id}>
+                                 {" "}
                                  <Form.Item
-                                    name={child.name}
-                                    label={child.name}
-                                    key={child.id}
+                                    label={dropdown.name}
+                                    name={dropdown.name}
                                  >
                                     <CustomSelect
-                                       arr={child.options}
-                                       loading={childCategoryLoading}
-                                       placeholder="Select Child Category"
+                                       arr={dropdown.options}
+                                       onChange={(val, opt) => {
+                                          onChange(val, opt, dropdown);
+                                       }}
                                     />
                                  </Form.Item>
-                              ))
-                           )}
-                        </div>
-                     );
-                  })}
-               <Row justify="end" gutter={16}>
+                                 {dropdown.value_id == dropdown.id ? (
+                                    <Form.Item
+                                       name={dropdown.name + " " + "[other]"}
+                                    >
+                                       <Input
+                                          placeholder="Enter Other Option"
+                                          style={{
+                                             border: "2px solid #9B0257",
+                                          }}
+                                       />
+                                    </Form.Item>
+                                 ) : (
+                                    dropdown.children.map((child) => (
+                                       <Form.Item
+                                          name={child.name}
+                                          label={child.name}
+                                          key={child.id}
+                                       >
+                                          <CustomSelect
+                                             arr={child.options}
+                                             loading={childCategoryLoading}
+                                             placeholder="Select Child Category"
+                                          />
+                                       </Form.Item>
+                                    ))
+                                 )}
+                              </div>
+                           );
+                        })}
+                  </>
+               )}
+
+               <Row justify="end" style={{ marginBottom: "30px" }} gutter={16}>
                   <Col>
                      <Button htmlType="submit" type="primary">
                         Submit
